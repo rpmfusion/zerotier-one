@@ -1,5 +1,5 @@
 Name:           zerotier-one
-Version:        1.6.6
+Version:        1.8.1
 Release:        1%{?dist}
 Summary:        Smart Ethernet Switch for Earth
 
@@ -48,7 +48,7 @@ BuildRequires:  pkgconfig(miniupnpc)
 BuildRequires:  pkgconfig(sqlite3)
 
 Provides:       bundled(http-parser)
-Provides:       bundled(json) = 3.2.0
+Provides:       bundled(json) = 3.10.2
 Provides:       bundled(salsa2012)
 
 %description
@@ -110,6 +110,9 @@ install -Dpm0644 debian/%{name}.service %{buildroot}%{_unitdir}/%{name}.service
 
 
 %changelog
+* Fri Oct 29 2021 Artem Polishchuk <ego.cordatus@gmail.com> - 1.8.1-1
+- chore(update): 1.8.1
+
 * Thu Sep 23 2021 Artem Polishchuk <ego.cordatus@gmail.com> - 1.6.6-1
 - build(update): 1.6.6
 
