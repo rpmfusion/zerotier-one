@@ -1,5 +1,5 @@
 Name:           zerotier-one
-Version:        1.8.3
+Version:        1.8.4
 Release:        1%{?dist}
 Summary:        Smart Ethernet Switch for Earth
 
@@ -110,6 +110,9 @@ install -Dpm0644 debian/%{name}.service %{buildroot}%{_unitdir}/%{name}.service
 
 
 %changelog
+* Fri Dec 03 2021 Artem Polishchuk <ego.cordatus@gmail.com> - 1.8.4-1
+- chore(update): 1.8.4
+
 * Fri Nov 19 2021 Artem Polishchuk <ego.cordatus@gmail.com> - 1.8.3-1
 - chore(update): 1.8.3
 
