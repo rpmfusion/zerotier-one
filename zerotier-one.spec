@@ -1,6 +1,6 @@
 Name:           zerotier-one
-Version:        1.8.4
-Release:        2%{?dist}
+Version:        1.8.5
+Release:        1%{?dist}
 Summary:        Smart Ethernet Switch for Earth
 
 # Boost:        README.md
@@ -110,6 +110,9 @@ install -Dpm0644 debian/%{name}.service %{buildroot}%{_unitdir}/%{name}.service
 
 
 %changelog
+* Fri Mar 04 2022 Artem Polishchuk <ego.cordatus@gmail.com> - 1.8.5-1
+- chore(update): 1.8.5
+
 * Thu Feb 10 2022 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 1.8.4-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_36_Mass_Rebuild
 
