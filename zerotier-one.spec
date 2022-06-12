@@ -1,5 +1,5 @@
 Name:           zerotier-one
-Version:        1.8.5
+Version:        1.8.10
 Release:        1%{?dist}
 Summary:        Smart Ethernet Switch for Earth
 
@@ -35,12 +35,19 @@ Summary:        Smart Ethernet Switch for Earth
 License:        BSL and Boost and ASL and ASL 2.0 and MIT
 URL:            https://zerotier.com
 Source0:        https://github.com/zerotier/ZeroTierOne/archive/%{version}/%{name}-%{version}.tar.gz
+# make with command: 'cd zeroidc && cargo vendor' and tar.gz vendor directory
+Source1:        vendor.tar.xz
 
+# for use vendor directory for build
+Patch0:		    zerotier-use-vendor-archive.patch
+
+BuildRequires:	cargo
 BuildRequires:  gcc-c++
 BuildRequires:  go-md2man
 BuildRequires:  http-parser-devel
 BuildRequires:  json-devel
 BuildRequires:  libnatpmp-devel
+BuildRequires:  openssl-devel
 BuildRequires:  systemd-rpm-macros
 
 BuildRequires:  pkgconfig(liblz4)
@@ -72,12 +79,15 @@ the original Google BeyondCorp paper and the Jericho Forum with its notion of
 
 
 %prep
-%autosetup -n ZeroTierOne-%{version}
+%autosetup -p 1 -n ZeroTierOne-%{version}
 
 ## Unbundling (maybe for future, depends on upstream)
 # rm -rf ext/http-parser
 # rm -rf ext/json
 
+pushd zeroidc
+tar -xf %{SOURCE1}
+popd
 
 %build
 %set_build_flags
@@ -110,6 +120,9 @@ install -Dpm0644 debian/%{name}.service %{buildroot}%{_unitdir}/%{name}.service
 
 
 %changelog
+* Sun Jun 12 2022 Leigh Scott <leigh123linux@gmail.com> - 1.8.10-1
+- chore(update): 1.8.10
+
 * Fri Mar 04 2022 Artem Polishchuk <ego.cordatus@gmail.com> - 1.8.5-1
 - chore(update): 1.8.5
 

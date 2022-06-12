@@ -1,0 +1,13 @@
+diff -ruN a/zeroidc/.cargo/config.toml b/zeroidc/.cargo/config.toml
+--- a/zeroidc/.cargo/config.toml	2022-05-11 02:45:12.000000000 +0900
++++ b/zeroidc/.cargo/config.toml	2022-05-16 08:28:37.836443191 +0900
+@@ -9,3 +9,9 @@
+ 
+ [target.i686-pc-windows-msvc]
+ rustflags = ["-C", "target-feature=+crt-static"]
++
++[source.crates-io]
++replace-with = "vendored-sources"
++
++[source.vendored-sources]
++directory = "vendor"
