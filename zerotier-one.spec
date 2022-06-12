@@ -35,13 +35,13 @@ Summary:        Smart Ethernet Switch for Earth
 License:        BSL and Boost and ASL and ASL 2.0 and MIT
 URL:            https://zerotier.com
 Source0:        https://github.com/zerotier/ZeroTierOne/archive/%{version}/%{name}-%{version}.tar.gz
-# make with command: 'cd zeroidc && cargo vendor' and tar.gz vendor directory
+# make with command: 'cd zeroidc && cargo vendor' and tar.xz vendor directory
 Source1:        vendor.tar.xz
 
 # for use vendor directory for build
 Patch0:		    zerotier-use-vendor-archive.patch
 
-BuildRequires:	cargo
+BuildRequires:  cargo
 BuildRequires:  gcc-c++
 BuildRequires:  go-md2man
 BuildRequires:  http-parser-devel
