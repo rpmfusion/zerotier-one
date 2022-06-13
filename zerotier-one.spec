@@ -1,5 +1,5 @@
 Name:           zerotier-one
-Version:        1.8.10
+Version:        1.8.9
 Release:        1%{?dist}
 Summary:        Smart Ethernet Switch for Earth
 
@@ -36,7 +36,7 @@ License:        BSL and Boost and ASL and ASL 2.0 and MIT
 URL:            https://zerotier.com
 Source0:        https://github.com/zerotier/ZeroTierOne/archive/%{version}/%{name}-%{version}.tar.gz
 # make with command: 'cd zeroidc && cargo vendor' and tar.xz vendor directory
-Source1:        vendor.tar.xz
+Source1:        vendor-%{version}.tar.xz
 
 # for use vendor directory for build
 Patch0:		    zerotier-use-vendor-archive.patch
@@ -120,8 +120,8 @@ install -Dpm0644 debian/%{name}.service %{buildroot}%{_unitdir}/%{name}.service
 
 
 %changelog
-* Sun Jun 12 2022 Leigh Scott <leigh123linux@gmail.com> - 1.8.10-1
-- chore(update): 1.8.10
+* Mon Jun 13 2022 Leigh Scott <leigh123linux@gmail.com> - 1.8.9-1
+- chore(update): 1.8.9
 
 * Fri Mar 04 2022 Artem Polishchuk <ego.cordatus@gmail.com> - 1.8.5-1
 - chore(update): 1.8.5
