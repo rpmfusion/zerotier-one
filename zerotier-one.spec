@@ -1,6 +1,6 @@
 Name:           zerotier-one
 Version:        1.8.9
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Smart Ethernet Switch for Earth
 
 # Boost:        README.md
@@ -47,7 +47,7 @@ BuildRequires:  go-md2man
 BuildRequires:  http-parser-devel
 BuildRequires:  json-devel
 BuildRequires:  libnatpmp-devel
-BuildRequires:  openssl-devel
+BuildRequires:  openssl1.1-devel
 BuildRequires:  systemd-rpm-macros
 
 BuildRequires:  pkgconfig(liblz4)
@@ -57,6 +57,8 @@ BuildRequires:  pkgconfig(sqlite3)
 Provides:       bundled(http-parser)
 Provides:       bundled(json) = 3.10.2
 Provides:       bundled(salsa2012)
+
+Requires:       openssl1.1
 
 %description
 ZeroTier is a smart programmable Ethernet switch for planet Earth. It allows all
@@ -120,6 +122,9 @@ install -Dpm0644 debian/%{name}.service %{buildroot}%{_unitdir}/%{name}.service
 
 
 %changelog
+* Wed Jun 22 2022 Leigh Scott <leigh123linux@gmail.com> - 1.8.9-2
+- The official package is built against openssl1.1
+
 * Mon Jun 13 2022 Leigh Scott <leigh123linux@gmail.com> - 1.8.9-1
 - chore(update): 1.8.9
 
