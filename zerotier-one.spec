@@ -1,6 +1,6 @@
 Name:           zerotier-one
 Version:        1.8.9
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Smart Ethernet Switch for Earth
 
 # Boost:        README.md
@@ -122,6 +122,10 @@ install -Dpm0644 debian/%{name}.service %{buildroot}%{_unitdir}/%{name}.service
 
 
 %changelog
+* Mon Aug 08 2022 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 1.8.9-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_37_Mass_Rebuild and ffmpeg
+  5.1
+
 * Wed Jun 22 2022 Leigh Scott <leigh123linux@gmail.com> - 1.8.9-2
 - The official package is built against openssl1.1
 
