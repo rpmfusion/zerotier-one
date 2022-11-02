@@ -1,6 +1,8 @@
+%global toolchain clang
+
 Name:           zerotier-one
-Version:        1.8.9
-Release:        3%{?dist}
+Version:        1.10.2
+Release:        1%{?dist}
 Summary:        Smart Ethernet Switch for Earth
 
 # Boost:        README.md
@@ -42,17 +44,9 @@ Source1:        vendor-%{version}.tar.xz
 Patch0:		    zerotier-use-vendor-archive.patch
 
 BuildRequires:  cargo
-BuildRequires:  gcc-c++
-BuildRequires:  go-md2man
-BuildRequires:  http-parser-devel
-BuildRequires:  json-devel
-BuildRequires:  libnatpmp-devel
-BuildRequires:  openssl1.1-devel
+BuildRequires:  clang
+BuildRequires:  openssl1.1-devel openssl1.1
 BuildRequires:  systemd-rpm-macros
-
-BuildRequires:  pkgconfig(liblz4)
-BuildRequires:  pkgconfig(miniupnpc)
-BuildRequires:  pkgconfig(sqlite3)
 
 Provides:       bundled(http-parser)
 Provides:       bundled(json) = 3.10.2
@@ -92,9 +86,10 @@ tar -xf %{SOURCE1}
 popd
 
 %build
-%set_build_flags
 %make_build \
-    STRIP=%{_bindir}/true
+ ZT_USE_MINIUPNPC=1 \
+ STRIP=%{_bindir}/true \
+ one
 
 
 %install
@@ -122,6 +117,11 @@ install -Dpm0644 debian/%{name}.service %{buildroot}%{_unitdir}/%{name}.service
 
 
 %changelog
+* Wed Nov 02 2022 Leigh Scott <leigh123linux@gmail.com> - 1.10.2-1
+- chore(update): 1.10.2
+- Switch to clang to match upstream spec file.
+- Bundle everything to match upstream spec file.
+
 * Mon Aug 08 2022 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 1.8.9-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_37_Mass_Rebuild and ffmpeg
   5.1
