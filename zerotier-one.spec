@@ -1,4 +1,8 @@
 %global toolchain clang
+# /usr/bin/debugedit: Cannot handle 8-byte build ID
+%ifarch %{arm}
+%global debug_package %{nil}
+%endif
 
 Name:           zerotier-one
 Version:        1.10.2
