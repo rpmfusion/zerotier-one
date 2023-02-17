@@ -5,7 +5,7 @@
 %endif
 
 Name:           zerotier-one
-Version:        1.10.2
+Version:        1.10.3
 Release:        1%{?dist}
 Summary:        Smart Ethernet Switch for Earth
 
@@ -121,6 +121,9 @@ install -Dpm0644 debian/%{name}.service %{buildroot}%{_unitdir}/%{name}.service
 
 
 %changelog
+* Fri Feb 17 2023 Leigh Scott <leigh123linux@gmail.com> - 1.10.3-1
+- chore(update): 1.10.3
+
 * Wed Nov 02 2022 Leigh Scott <leigh123linux@gmail.com> - 1.10.2-1
 - chore(update): 1.10.2
 - Switch to clang to match upstream spec file.
