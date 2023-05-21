@@ -58,6 +58,8 @@ Provides:       bundled(json) = 3.10.2
 Provides:       bundled(salsa2012)
 
 Requires:       openssl1.1
+%{?systemd_requires}
+%{?sysusers_requires_compat}
 
 %description
 ZeroTier is a smart programmable Ethernet switch for planet Earth. It allows all
