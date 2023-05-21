@@ -1,11 +1,11 @@
-%global toolchain clang
+#global toolchain clang
 # /usr/bin/debugedit: Cannot handle 8-byte build ID
 %ifarch %{arm}
 %global debug_package %{nil}
 %endif
 
 Name:           zerotier-one
-Version:        1.10.3
+Version:        1.10.6
 Release:        1%{?dist}
 Summary:        Smart Ethernet Switch for Earth
 
@@ -43,12 +43,13 @@ URL:            https://zerotier.com
 Source0:        https://github.com/zerotier/ZeroTierOne/archive/%{version}/%{name}-%{version}.tar.gz
 # make with command: 'cd zeroidc && cargo vendor' and tar.xz vendor directory
 Source1:        vendor-%{version}.tar.xz
+Source2:        zerotier-one-sysusers
 
 # for use vendor directory for build
 Patch0:		    zerotier-use-vendor-archive.patch
 
 BuildRequires:  cargo
-BuildRequires:  clang
+BuildRequires:  gcc-c++
 BuildRequires:  openssl1.1-devel openssl1.1
 BuildRequires:  systemd-rpm-macros
 
@@ -98,8 +99,11 @@ popd
 
 %install
 %make_install
-install -Dpm0644 debian/%{name}.service %{buildroot}%{_unitdir}/%{name}.service
+install -D -m0644 debian/%{name}.service %{buildroot}%{_unitdir}/%{name}.service
+install -D -m0644 %{SOURCE2} %{buildroot}%{_sysusersdir}/%{name}.conf
 
+%pre
+%sysusers_create_compat %{SOURCE2}
 
 %post
 %systemd_post %{name}.service
@@ -117,10 +121,14 @@ install -Dpm0644 debian/%{name}.service %{buildroot}%{_unitdir}/%{name}.service
 %{_mandir}/man{1,8}/*.{1,8}*
 %{_sbindir}/zerotier-*
 %{_sharedstatedir}/%{name}/
+%{_sysusersdir}/%{name}.conf
 %{_unitdir}/*.service
 
 
 %changelog
+* Sun May 21 2023 Leigh Scott <leigh123linux@gmail.com> - 1.10.6-1
+- chore(update): 1.10.6
+
 * Fri Feb 17 2023 Leigh Scott <leigh123linux@gmail.com> - 1.10.3-1
 - chore(update): 1.10.3
 
