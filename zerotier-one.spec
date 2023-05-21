@@ -88,6 +88,12 @@ the original Google BeyondCorp paper and the Jericho Forum with its notion of
 # rm -rf ext/http-parser
 # rm -rf ext/json
 
+sed \
+ -e 's/RUSTFLAGS=/RUSTFLAGS?=/' \
+ -e 's/cargo build $(RUSTFLAGS)/cargo build --release/' \
+ -i make-linux.mk
+
+
 pushd zeroidc
 tar -xf %{SOURCE1}
 popd
