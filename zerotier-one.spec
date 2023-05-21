@@ -1,5 +1,8 @@
 #global toolchain clang
-%global _default_patch_fuzz 1
+# /usr/bin/debugedit: Cannot handle 8-byte build ID
+%ifarch %{arm}
+%global debug_package %{nil}
+%endif
 
 Name:           zerotier-one
 Version:        1.10.6
@@ -44,7 +47,6 @@ Source2:        zerotier-one-sysusers
 
 # for use vendor directory for build
 Patch0:		    zerotier-use-vendor-archive.patch
-Patch1:         https://github.com/zerotier/ZeroTierOne/pull/2011.patch
 
 BuildRequires:  cargo
 BuildRequires:  gcc-c++
