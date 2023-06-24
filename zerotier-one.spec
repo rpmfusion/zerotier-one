@@ -6,7 +6,7 @@
 
 Name:           zerotier-one
 Version:        1.10.6
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Smart Ethernet Switch for Earth
 
 # Boost:        README.md
@@ -58,6 +58,7 @@ Provides:       bundled(json) = 3.10.2
 Provides:       bundled(salsa2012)
 
 Requires:       openssl1.1
+Requires:       /sbin/nologin
 %{?systemd_requires}
 %{?sysusers_requires_compat}
 
@@ -134,6 +135,9 @@ install -D -m0644 %{SOURCE2} %{buildroot}%{_sysusersdir}/%{name}.conf
 
 
 %changelog
+* Sat Jun 24 2023 Leigh Scott <leigh123linux@gmail.com> - 1.10.6-2
+- Fix rfbz#6714
+
 * Sun May 21 2023 Leigh Scott <leigh123linux@gmail.com> - 1.10.6-1
 - chore(update): 1.10.6
 
