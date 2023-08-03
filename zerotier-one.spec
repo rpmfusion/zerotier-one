@@ -6,7 +6,7 @@
 
 Name:           zerotier-one
 Version:        1.10.6
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Smart Ethernet Switch for Earth
 
 # Boost:        README.md
@@ -135,6 +135,9 @@ install -D -m0644 %{SOURCE2} %{buildroot}%{_sysusersdir}/%{name}.conf
 
 
 %changelog
+* Thu Aug 03 2023 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 1.10.6-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_39_Mass_Rebuild
+
 * Sat Jun 24 2023 Leigh Scott <leigh123linux@gmail.com> - 1.10.6-2
 - Fix rfbz#6714
 
