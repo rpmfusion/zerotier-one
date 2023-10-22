@@ -5,7 +5,7 @@
 %endif
 
 Name:           zerotier-one
-Version:        1.12.0
+Version:        1.12.2
 Release:        1%{?dist}
 Summary:        Smart Ethernet Switch for Earth
 
@@ -135,6 +135,9 @@ install -D -m0644 %{SOURCE2} %{buildroot}%{_sysusersdir}/%{name}.conf
 
 
 %changelog
+* Sun Oct 22 2023 Leigh Scott <leigh123linux@gmail.com> - 1.12.2-1
+- rebuilt
+
 * Thu Aug 24 2023 Leigh Scott <leigh123linux@gmail.com> - 1.12.0-1
 - chore(update): 1.12.0
 
