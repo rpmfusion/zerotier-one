@@ -1,4 +1,4 @@
-#global toolchain clang
+%global toolchain clang
 # /usr/bin/debugedit: Cannot handle 8-byte build ID
 %ifarch %{arm}
 %global debug_package %{nil}
@@ -49,7 +49,7 @@ Source2:        zerotier-one-sysusers
 Patch0:		    zerotier-use-vendor-archive.patch
 
 BuildRequires:  cargo
-BuildRequires:  gcc-c++
+BuildRequires:  clang
 BuildRequires:  openssl1.1-devel openssl1.1
 BuildRequires:  systemd-rpm-macros
 
