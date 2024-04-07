@@ -6,7 +6,7 @@
 
 Name:           zerotier-one
 Version:        1.12.2
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Smart Ethernet Switch for Earth
 
 # Boost:        README.md
@@ -50,14 +50,14 @@ Patch0:		    zerotier-use-vendor-archive.patch
 
 BuildRequires:  cargo
 BuildRequires:  clang
-BuildRequires:  openssl1.1-devel openssl1.1
+BuildRequires:  openssl-devel openssl
 BuildRequires:  systemd-rpm-macros
 
 Provides:       bundled(http-parser)
 Provides:       bundled(json) = 3.10.2
 Provides:       bundled(salsa2012)
 
-Requires:       openssl1.1
+Requires:       openssl
 Requires:       /sbin/nologin
 %{?systemd_requires}
 %{?sysusers_requires_compat}
@@ -135,6 +135,9 @@ install -D -m0644 %{SOURCE2} %{buildroot}%{_sysusersdir}/%{name}.conf
 
 
 %changelog
+* Sun Apr 07 2024 Leigh Scott <leigh123linux@gmail.com> - 1.12.2-3
+- Rebuild against standard openssl
+
 * Sun Feb 04 2024 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 1.12.2-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_40_Mass_Rebuild
 
