@@ -5,16 +5,15 @@
 %endif
 
 Name:           zerotier-one
-Version:        1.4.0
-Release:        1%{?dist}
+Version:        1.12.2
+Release:        3%{?dist}
 Summary:        Smart Ethernet Switch for Earth
 
+# Boost:        README.md
 #
-# GPLv3+:       attic/   
-#               controller/
+# ASL:          controller/
 #               debian/copyright
 #               include/
-#               java/  
 #               node/
 #               one.cpp
 #               osdep/
@@ -22,35 +21,43 @@ Summary:        Smart Ethernet Switch for Earth
 #               selftest.cpp
 #               service/
 #               version.h
-#               COPYING
-#               LICENSE.txt
-#               README.md
+#
+# ASL 2.0:      LICENSE.txt
 #
 # BSD:          ext/libnatpmp/
 #               ext/miniupnpc/
 #
+# Boost:        COPYING
 #
 # MIT           ext/cpp-httplib/
 #               ext/http-parser/
 #               ext/json/LICENSE.MIT
 #               ext/librabbitmq/
 #
+# GPLv3+:       attic/
+#               ext/libnatpmp/
+#               java/
 
-License:        BSD and GPLv3+ and MIT
+License:        BSL and Boost and ASL and ASL 2.0 and MIT
 URL:            https://zerotier.com
 Source0:        https://github.com/zerotier/ZeroTierOne/archive/%{version}/%{name}-%{version}.tar.gz
-Source1:        zerotier-one-sysusers
+# make with command: 'cd zeroidc && cargo vendor' and tar.xz vendor directory
+Source1:        vendor-%{version}.tar.xz
+Source2:        zerotier-one-sysusers
 
+# for use vendor directory for build
+Patch0:		    zerotier-use-vendor-archive.patch
+
+BuildRequires:  cargo
 BuildRequires:  clang
-BuildRequires:  libnatpmp-devel
-BuildRequires:  miniupnpc-devel
+BuildRequires:  openssl-devel openssl
 BuildRequires:  systemd-rpm-macros
 
 Provides:       bundled(http-parser)
 Provides:       bundled(json) = 3.10.2
 Provides:       bundled(salsa2012)
 
-Requires:       iproute
+Requires:       openssl
 Requires:       /sbin/nologin
 %{?systemd_requires}
 %{?sysusers_requires_compat}
@@ -82,16 +89,30 @@ the original Google BeyondCorp paper and the Jericho Forum with its notion of
 # rm -rf ext/http-parser
 # rm -rf ext/json
 
+sed \
+ -e 's/RUSTFLAGS=/RUSTFLAGS?=/' \
+ -e 's/cargo build $(RUSTFLAGS)/cargo build --release/' \
+ -i make-linux.mk
+
+
+pushd zeroidc
+tar -xf %{SOURCE1}
+popd
+
 %build
-%make_build STRIP=%{_bindir}/true
+%make_build \
+ ZT_USE_MINIUPNPC=1 \
+ STRIP=%{_bindir}/true \
+ one
+
 
 %install
 %make_install
 install -D -m0644 debian/%{name}.service %{buildroot}%{_unitdir}/%{name}.service
-install -D -m0644 %{SOURCE1} %{buildroot}%{_sysusersdir}/%{name}.conf
+install -D -m0644 %{SOURCE2} %{buildroot}%{_sysusersdir}/%{name}.conf
 
 %pre
-%sysusers_create_compat %{SOURCE1}
+%sysusers_create_compat %{SOURCE2}
 
 %post
 %systemd_post %{name}.service
@@ -104,7 +125,7 @@ install -D -m0644 %{SOURCE1} %{buildroot}%{_sysusersdir}/%{name}.conf
 
 
 %files
-%license COPYING LICENSE.GPL-2 LICENSE.GPL-3 LICENSE.txt
+%license COPYING
 %doc AUTHORS.md README.md RELEASE-NOTES.md OFFICIAL-RELEASE-STEPS.md
 %{_mandir}/man{1,8}/*.{1,8}*
 %{_sbindir}/zerotier-*
@@ -114,9 +135,6 @@ install -D -m0644 %{SOURCE1} %{buildroot}%{_sysusersdir}/%{name}.conf
 
 
 %changelog
-* Fri Apr 19 2024 Leigh Scott <leigh123linux@gmail.com> - 1.4.0-1
-- Update to 1.4.0
-
 * Sun Apr 07 2024 Leigh Scott <leigh123linux@gmail.com> - 1.12.2-3
 - Rebuild against standard openssl
 

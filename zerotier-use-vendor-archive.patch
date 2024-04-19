@@ -1,0 +1,17 @@
+--- a/zeroidc/.cargo/config.toml
++++ b/zeroidc/.cargo/config.toml
+@@ -9,3 +9,14 @@ rustflags = ["-C", "target-feature=+crt-
+ 
+ [target.i686-pc-windows-msvc]
+ rustflags = ["-C", "target-feature=+crt-static"]
++
++[source.crates-io]
++replace-with = "vendored-sources"
++
++[source."git+https://github.com/glimberg/rust-jwt"]
++git = "https://github.com/glimberg/rust-jwt"
++replace-with = "vendored-sources"
++
++[source.vendored-sources]
++directory = "vendor"
++
