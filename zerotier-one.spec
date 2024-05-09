@@ -5,8 +5,8 @@
 %endif
 
 Name:           zerotier-one
-Version:        1.12.2
-Release:        3%{?dist}
+Version:        1.14.0
+Release:        1%{?dist}
 Summary:        Smart Ethernet Switch for Earth
 
 # Boost:        README.md
@@ -41,16 +41,15 @@ Summary:        Smart Ethernet Switch for Earth
 License:        BSL and Boost and ASL and ASL 2.0 and MIT
 URL:            https://zerotier.com
 Source0:        https://github.com/zerotier/ZeroTierOne/archive/%{version}/%{name}-%{version}.tar.gz
-# make with command: 'cd zeroidc && cargo vendor' and tar.xz vendor directory
+# make with command: 'cd rustybits and  mkdir .cargo 
+# cargo vendor > .cargo/config.toml' and tar cvf vendor-%{version}.tar.xz vendor/ .cargo/
 Source1:        vendor-%{version}.tar.xz
 Source2:        zerotier-one-sysusers
-
-# for use vendor directory for build
-Patch0:		    zerotier-use-vendor-archive.patch
 
 BuildRequires:  cargo
 BuildRequires:  clang
 BuildRequires:  openssl-devel openssl
+BuildRequires:  protobuf-devel
 BuildRequires:  systemd-rpm-macros
 
 Provides:       bundled(http-parser)
@@ -83,19 +82,9 @@ the original Google BeyondCorp paper and the Jericho Forum with its notion of
 
 
 %prep
-%autosetup -p 1 -n ZeroTierOne-%{version}
+%autosetup -p1 -n ZeroTierOne-%{version}
 
-## Unbundling (maybe for future, depends on upstream)
-# rm -rf ext/http-parser
-# rm -rf ext/json
-
-sed \
- -e 's/RUSTFLAGS=/RUSTFLAGS?=/' \
- -e 's/cargo build $(RUSTFLAGS)/cargo build --release/' \
- -i make-linux.mk
-
-
-pushd zeroidc
+pushd rustybits
 tar -xf %{SOURCE1}
 popd
 
@@ -135,6 +124,9 @@ install -D -m0644 %{SOURCE2} %{buildroot}%{_sysusersdir}/%{name}.conf
 
 
 %changelog
+* Thu May 09 2024 Leigh Scott <leigh123linux@gmail.com> - 1.14.0-1
+- Update to 1.14.0
+
 * Sun Apr 07 2024 Leigh Scott <leigh123linux@gmail.com> - 1.12.2-3
 - Rebuild against standard openssl
 

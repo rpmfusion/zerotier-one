@@ -1,17 +1,26 @@
---- a/zeroidc/.cargo/config.toml
-+++ b/zeroidc/.cargo/config.toml
-@@ -9,3 +9,14 @@ rustflags = ["-C", "target-feature=+crt-
- 
- [target.i686-pc-windows-msvc]
- rustflags = ["-C", "target-feature=+crt-static"]
-+
+--- a/rustybits/zeroidc/.cargo/config.toml
++++ b/rustybits/zeroidc/.cargo/config.toml
+@@ -1,11 +1,14 @@
+-[target.x86_64-apple-darwin]
+-rustflags=["-C", "link-arg=-mmacosx-version-min=10.13"]
 +[source.crates-io]
 +replace-with = "vendored-sources"
-+
+ 
+-[target.aarch64-apple-darwin]
+-rustflags=["-C", "link-arg=-mmacosx-version-min=10.13"]
 +[source."git+https://github.com/glimberg/rust-jwt"]
 +git = "https://github.com/glimberg/rust-jwt"
 +replace-with = "vendored-sources"
-+
+ 
+-[target.x86_64-pc-windows-msvc]
+-rustflags = ["-C", "target-feature=+crt-static"]
++[source."git+https://github.com/temporalio/sdk-core?branch=master"]
++git = "https://github.com/temporalio/sdk-core"
++branch = "master"
++replace-with = "vendored-sources"
+ 
+-[target.i686-pc-windows-msvc]
+-rustflags = ["-C", "target-feature=+crt-static"]
 +[source.vendored-sources]
 +directory = "vendor"
-+
+
