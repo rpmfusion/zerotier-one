@@ -49,7 +49,6 @@ Source2:        zerotier-one-sysusers
 BuildRequires:  cargo
 BuildRequires:  clang
 BuildRequires:  openssl-devel openssl
-BuildRequires:  protobuf-devel
 BuildRequires:  systemd-rpm-macros
 
 Provides:       bundled(http-parser)
