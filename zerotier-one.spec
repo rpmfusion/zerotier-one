@@ -45,6 +45,7 @@ Source0:        https://github.com/zerotier/ZeroTierOne/archive/%{version}/%{nam
 # cargo vendor > .cargo/config.toml' and tar cvf vendor-%{version}.tar.xz vendor/ .cargo/
 Source1:        vendor-%{version}.tar.xz
 Source2:        zerotier-one-sysusers
+Patch0:         e915d109530a34370af948a04cac91b2f049c486.patch
 
 BuildRequires:  cargo
 BuildRequires:  clang
