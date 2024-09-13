@@ -5,8 +5,8 @@
 %endif
 
 Name:           zerotier-one
-Version:        1.14.0
-Release:        2%{?dist}
+Version:        1.14.1
+Release:        1%{?dist}
 Summary:        Smart Ethernet Switch for Earth
 
 # Boost:        README.md
@@ -42,10 +42,9 @@ License:        BSL and Boost and ASL and ASL 2.0 and MIT
 URL:            https://zerotier.com
 Source0:        https://github.com/zerotier/ZeroTierOne/archive/%{version}/%{name}-%{version}.tar.gz
 # make with command: 'cd rustybits and  mkdir .cargo 
-# cargo vendor > .cargo/config.toml' and tar cvf vendor-%{version}.tar.xz vendor/ .cargo/
+# cargo vendor > .cargo/config.toml' and tar cvf vendor-%%{version}.tar.xz vendor/ .cargo/
 Source1:        vendor-%{version}.tar.xz
 Source2:        zerotier-one-sysusers
-Patch0:         e915d109530a34370af948a04cac91b2f049c486.patch
 
 BuildRequires:  cargo
 BuildRequires:  clang
@@ -86,6 +85,9 @@ the original Google BeyondCorp paper and the Jericho Forum with its notion of
 
 pushd rustybits
 tar -xf %{SOURCE1}
+sed -i -e '1d' vendor/ipnet/src/lib.rs
+sed -i -e 's@54cb3178bd183149cd9db26f0134fa9d31b305d8a29ab75c320408d5fb0b3ed0@9f114797d36b74da607ba52fe38f050593b0b8e046ea7cbe9075d87f8007aed4@g' \
+ vendor/ipnet/.cargo-checksum.json
 popd
 
 %build
@@ -124,6 +126,9 @@ install -D -m0644 %{SOURCE2} %{buildroot}%{_sysusersdir}/%{name}.conf
 
 
 %changelog
+* Fri Sep 13 2024 Leigh Scott <leigh123linux@gmail.com> - 1.14.1-1
+- Update to 1.14.1
+
 * Sat Aug 03 2024 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 1.14.0-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_41_Mass_Rebuild
 
