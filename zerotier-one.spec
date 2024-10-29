@@ -5,7 +5,7 @@
 %endif
 
 Name:           zerotier-one
-Version:        1.14.1
+Version:        1.14.2
 Release:        1%{?dist}
 Summary:        Smart Ethernet Switch for Earth
 
@@ -85,9 +85,6 @@ the original Google BeyondCorp paper and the Jericho Forum with its notion of
 
 pushd rustybits
 tar -xf %{SOURCE1}
-sed -i -e '1d' vendor/ipnet/src/lib.rs
-sed -i -e 's@54cb3178bd183149cd9db26f0134fa9d31b305d8a29ab75c320408d5fb0b3ed0@9f114797d36b74da607ba52fe38f050593b0b8e046ea7cbe9075d87f8007aed4@g' \
- vendor/ipnet/.cargo-checksum.json
 popd
 
 %build
@@ -126,6 +123,9 @@ install -D -m0644 %{SOURCE2} %{buildroot}%{_sysusersdir}/%{name}.conf
 
 
 %changelog
+* Tue Oct 29 2024 Leigh Scott <leigh123linux@gmail.com> - 1.14.2-1
+- Update to 1.14.2
+
 * Fri Sep 13 2024 Leigh Scott <leigh123linux@gmail.com> - 1.14.1-1
 - Update to 1.14.1
 
