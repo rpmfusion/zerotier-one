@@ -3,10 +3,11 @@
 %ifarch %{arm}
 %global debug_package %{nil}
 %endif
+%global _sbindir %{_prefix}/sbin
 
 Name:           zerotier-one
 Version:        1.14.2
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Smart Ethernet Switch for Earth
 
 # Boost:        README.md
@@ -123,6 +124,9 @@ install -D -m0644 %{SOURCE2} %{buildroot}%{_sysusersdir}/%{name}.conf
 
 
 %changelog
+* Wed May 28 2025 Leigh Scott <leigh123linux@gmail.com> - 1.14.2-3
+- Override sbin > bin move, the path is hardcoded
+
 * Wed Jan 29 2025 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 1.14.2-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_42_Mass_Rebuild
 
