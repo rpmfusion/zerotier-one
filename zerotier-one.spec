@@ -1,13 +1,9 @@
 %global toolchain clang
-# /usr/bin/debugedit: Cannot handle 8-byte build ID
-%ifarch %{arm}
-%global debug_package %{nil}
-%endif
 %global _sbindir %{_prefix}/sbin
 
 Name:           zerotier-one
-Version:        1.14.2
-Release:        4%{?dist}
+Version:        1.16.0
+Release:        1%{?dist}
 Summary:        Smart Ethernet Switch for Earth
 
 # Boost:        README.md
@@ -114,8 +110,8 @@ install -D -m0644 %{SOURCE2} %{buildroot}%{_sysusersdir}/%{name}.conf
 
 
 %files
-%license COPYING
-%doc AUTHORS.md README.md RELEASE-NOTES.md OFFICIAL-RELEASE-STEPS.md
+%license LICENSE.txt LICENSE-MPL.txt
+%doc README.md RELEASE-NOTES.md OFFICIAL-RELEASE-STEPS.md
 %{_mandir}/man{1,8}/*.{1,8}*
 %{_sbindir}/zerotier-*
 %{_sharedstatedir}/%{name}/
@@ -124,6 +120,9 @@ install -D -m0644 %{SOURCE2} %{buildroot}%{_sysusersdir}/%{name}.conf
 
 
 %changelog
+* Thu Sep 11 2025 Leigh Scott <leigh123linux@gmail.com> - 1.16.0-1
+- Update to 1.16.0
+
 * Mon Jul 28 2025 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 1.14.2-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_43_Mass_Rebuild
 
