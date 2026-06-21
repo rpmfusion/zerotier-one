@@ -2,8 +2,8 @@
 %global _sbindir %{_prefix}/sbin
 
 Name:           zerotier-one
-Version:        1.16.0
-Release:        2%{?dist}
+Version:        1.16.2
+Release:        1%{?dist}
 Summary:        Smart Ethernet Switch for Earth
 
 # Boost:        README.md
@@ -37,7 +37,7 @@ Summary:        Smart Ethernet Switch for Earth
 
 License:        BSL and Boost and ASL and ASL 2.0 and MIT
 URL:            https://zerotier.com
-Source0:        https://github.com/zerotier/ZeroTierOne/archive/%{version}/%{name}-%{version}.tar.gz
+Source0:        https://github.com/zerotier/ZeroTierOne/archive/refs/tags/%{version}/%{name}-%{version}.tar.gz
 # make with command: 'cd rustybits and  mkdir .cargo 
 # cargo vendor > .cargo/config.toml' and tar cvf vendor-%%{version}.tar.xz vendor/ .cargo/
 Source1:        vendor-%{version}.tar.xz
@@ -120,6 +120,9 @@ install -D -m0644 %{SOURCE2} %{buildroot}%{_sysusersdir}/%{name}.conf
 
 
 %changelog
+* Sun Jun 21 2026 Leigh Scott <leigh123linux@gmail.com> - 1.16.2-1
+- Update to 1.16.2
+
 * Mon Feb 02 2026 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 1.16.0-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_44_Mass_Rebuild
 
